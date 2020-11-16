@@ -6,6 +6,10 @@ defmodule StripeClient.Utils do
     HTTPoison.get(url, headers, options) |> handle_response()
   end
 
+  def post(url, body, headers \\ [], options \\ []) do
+    HTTPoison.post(url, body, headers, options) |> handle_response()
+  end
+
   def handle_response({:ok, %{status_code: status_code, body: body}}) do
     {status_code |> handle_status_code(), body |> Poison.Parser.parse!(%{})}
   end
